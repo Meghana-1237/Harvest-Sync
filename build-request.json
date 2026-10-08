@@ -1,0 +1,74 @@
+{
+  "kind": "build_request",
+  "title": "Diagnose and fix deployment error",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-92",
+      "text": "Investigate the deployment error that occurred during the most recent deployment attempt and identify the root cause by examining deployment logs, build output, and canister configuration",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "what error i got  can u fix it"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The specific deployment error message and stack trace are identified",
+        "The root cause of the deployment failure is determined (e.g., Motoko compilation error, canister memory limit, network issue, configuration problem)",
+        "A clear diagnosis is provided explaining why the deployment failed"
+      ]
+    },
+    {
+      "id": "REQ-93",
+      "text": "Fix the identified deployment error by applying the appropriate solution based on the root cause (e.g., correcting syntax errors, fixing type mismatches, adjusting canister settings, resolving dependency issues)",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "can u fix it"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The code changes or configuration adjustments that caused the deployment error are corrected",
+        "The backend compiles successfully without errors",
+        "The frontend builds successfully without errors",
+        "The application can be deployed to the Internet Computer network without errors"
+      ]
+    },
+    {
+      "id": "REQ-94",
+      "text": "Verify that the canister can be successfully deployed and that all existing functionality continues to work correctly after the fix is applied",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The deployment completes successfully without errors",
+        "The canister is accessible and responsive after deployment",
+        "All existing features (user authentication, harvest listings, commitments, transport offers, buyer demands, crop diagnosis) remain functional",
+        "No regressions are introduced by the deployment fix"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify the core business logic or data structures unless they are the direct cause of the deployment error",
+    "Preserve all existing user data and state during the fix",
+    "Maintain backward compatibility with existing frontend queries and mutations"
+  ],
+  "nonGoals": [
+    "Adding new features or functionality",
+    "Refactoring unrelated code",
+    "Performance optimizations unrelated to the deployment issue"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

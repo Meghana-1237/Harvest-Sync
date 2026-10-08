@@ -1,0 +1,932 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 31,
+  "summary": "Web application called 'HarvestSync' that coordinates perishable crop harvests between farmers, buyers, and logistics providers with three user roles (Farmer, Buyer, Transporter) and a landing page. Uses green-and-white Agri-tech aesthetic with Tailwind CSS. Core goal: enable Pre-Harvest Commitments to reduce spoilage. Planning to add four AI/ML features: predictive analytics for yield/price forecasting, computer vision for crop maturity detection, logistics optimization algorithms, and NLP for voice/text input parsing.",
+  "architectural_notes": [
+    "Three distinct user roles: Farmer, Buyer, Transporter",
+    "Tailwind CSS for styling with green-and-white color scheme",
+    "Focus on perishable crop coordination workflow",
+    "Smart Escrow Payment system for Pre-Harvest Commitments",
+    "Harvest filtering by village variation and quality certificates",
+    "Transport offer acceptance and tracking visible to Buyers and Farmers",
+    "Transport offers should link to specific buyer commitments chosen by farmer",
+    "Once a commitment is linked to a transport offer, it should not appear in selection again",
+    "Buyers can post demand requests specifying crop type, quantity, price per kg, and destination",
+    "Farmers should see buyer demand requests and be able to accept them"
+  ],
+  "known_issues": [
+    "Buyer commitments not displaying in Buyer dashboard after Pre-Harvest Commitment is made",
+    "Offer Transport button not working when commitments have been made"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-a-landing-page-that-explains-harvestsync-s-value-proposition-for-coordinating-perishable-crop-harvests-and-reducing-spoilage-through-pre-harvest-commitments",
+      "title": "Create a landing page that explains HarvestSync's value proposition for coordinating perishable crop harvests and reducing spoilage through Pre-Harvest Commitments",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-user-authentication-and-role-management-system-supporting-three-distinct-roles-farmer-buyer-and-transporter",
+      "title": "Implement user authentication and role management system supporting three distinct roles: Farmer, Buyer, and Transporter",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-farmer-dashboard-that-allows-farmers-to-list-upcoming-harvest-details-including-crop-type-estimated-quantity-harvest-date-and-location",
+      "title": "Build Farmer dashboard that allows farmers to list upcoming harvest details including crop type, estimated quantity, harvest date, and location",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-buyer-dashboard-that-displays-available-harvest-listings-and-enables-buyers-to-browse-crops-and-make-pre-harvest-commitments",
+      "title": "Build Buyer dashboard that displays available harvest listings and enables buyers to browse crops and make Pre-Harvest Commitments",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-transporter-dashboard-that-shows-harvests-requiring-logistics-coordination-and-allows-transporters-to-offer-pickup-and-delivery-services",
+      "title": "Build Transporter dashboard that shows harvests requiring logistics coordination and allows transporters to offer pickup and delivery services",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-pre-harvest-commitment-workflow-that-connects-farmers-buyers-and-transporters-to-coordinate-harvest-logistics-before-crops-are-picked",
+      "title": "Implement Pre-Harvest Commitment workflow that connects farmers, buyers, and transporters to coordinate harvest logistics before crops are picked",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-clean-modern-green-and-white-agri-tech-aesthetic-consistently-across-all-pages-using-tailwind-css-with-nature-inspired-design-elements-that-convey-freshness-sustainability-and-agricultural-themes",
+      "title": "Apply a clean, modern green-and-white Agri-tech aesthetic consistently across all pages using Tailwind CSS, with nature-inspired design elements that convey freshness, sustainability, and agricultural themes",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-a-readiness-score-field-for-each-harvest-listing-in-the-buyer-dashboard-s-marketplace-view-showing-a-numerical-score-that-indicates-harvest-readiness",
+      "title": "Display a 'Readiness Score' field for each harvest listing in the Buyer dashboard's marketplace view, showing a numerical score that indicates harvest readiness",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-make-commitment-button-with-a-pre-harvest-commitment-button-on-harvest-listing-cards-in-the-buyer-dashboard",
+      "title": "Replace the existing 'Make Commitment' button with a 'Pre-Harvest Commitment' button on harvest listing cards in the Buyer dashboard",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-smart-escrow-payment-ui-modal-that-displays-funds-secured-until-delivery-message-when-the-pre-harvest-commitment-button-is-clicked-before-or-after-the-buyer-specifies-commitment-details",
+      "title": "Create a Smart Escrow Payment UI modal that displays 'Funds secured until delivery' message when the Pre-Harvest Commitment button is clicked, before or after the buyer specifies commitment details",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-village-wise-variation-filter-option-to-the-buyer-dashboard-marketplace-that-allows-buyers-to-filter-harvest-listings-by-village-or-location-variation",
+      "title": "Add a 'Village-wise variation' filter option to the Buyer dashboard marketplace that allows buyers to filter harvest listings by village or location variation",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-crop-quality-certificate-status-filter-to-the-buyer-dashboard-marketplace-that-allows-buyers-to-filter-harvest-listings-based-on-whether-they-have-a-quality-certificate",
+      "title": "Add a 'Crop Quality Certificate' status filter to the Buyer dashboard marketplace that allows buyers to filter harvest listings based on whether they have a quality certificate",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-offer-transport-button-on-the-transportopportunitycard-component-so-that-it-successfully-triggers-the-maketransportoffermodal-to-open",
+      "title": "Fix the 'Offer Transport' button on the TransportOpportunityCard component so that it successfully triggers the MakeTransportOfferModal to open",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-maketransportoffermodal-to-collect-vehicle-type-load-capacity-route-start-location-and-route-end-location-instead-of-the-current-distance-and-cost-fields",
+      "title": "Update the MakeTransportOfferModal to collect vehicle type, load capacity, route start location, and route end location instead of the current distance and cost fields",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-frontend-usequeries-ts-to-pass-vehicletype-loadcapacity-routestart-and-routeend-parameters-to-the-backend-maketransportoffer-mutation-instead-of-distance-and-cost",
+      "title": "Update the frontend useQueries.ts to pass vehicleType, loadCapacity, routeStart, and routeEnd parameters to the backend makeTransportOffer mutation instead of distance and cost",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-buyercommitmentsview-component-to-correctly-fetch-and-display-the-buyer-s-commitments-using-the-usegetcallercommitments-hook-showing-commitment-details-including-harvest-listing-information-quantity-offer-price-and-status",
+      "title": "Fix the BuyerCommitmentsView component to correctly fetch and display the buyer's commitments using the useGetCallerCommitments hook, showing commitment details including harvest listing information, quantity, offer price, and status",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-that-after-a-buyer-successfully-submits-a-commitment-through-the-smartescrowpaymentmodal-the-buyercommitmentsview-component-s-data-cache-is-invalidated-and-refreshed-to-immediately-display-the-new-commitment",
+      "title": "Ensure that after a buyer successfully submits a commitment through the SmartEscrowPaymentModal, the BuyerCommitmentsView component's data cache is invalidated and refreshed to immediately display the new commitment",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-transportopportunitycard-component-so-that-the-offer-transport-button-remains-enabled-and-functional-after-commitments-have-been-made-to-a-harvest-listing-ensuring-the-maketransportoffermodal-opens-correctly-regardless-of-commitment-status",
+      "title": "Fix the TransportOpportunityCard component so that the 'Offer Transport' button remains enabled and functional after commitments have been made to a harvest listing, ensuring the MakeTransportOfferModal opens correctly regardless of commitment status",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-hook-in-usequeries-ts-to-fetch-transport-offers-for-a-specific-harvest-listing-including-their-acceptance-status-and-tracking-information",
+      "title": "Create a frontend hook in useQueries.ts to fetch transport offers for a specific harvest listing including their acceptance status and tracking information",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-mutation-hook-in-usequeries-ts-that-allows-farmers-to-accept-a-transport-offer",
+      "title": "Create a frontend mutation hook in useQueries.ts that allows farmers to accept a transport offer",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-mutation-hook-in-usequeries-ts-that-allows-transporters-to-update-tracking-information-for-their-transport-offers",
+      "title": "Create a frontend mutation hook in useQueries.ts that allows transporters to update tracking information for their transport offers",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-transport-offers-section-to-the-farmerlistingcard-component-that-displays-all-transport-offers-for-the-harvest-listing-with-their-acceptance-status-and-an-accept-button-for-pending-offers",
+      "title": "Add a transport offers section to the FarmerListingCard component that displays all transport offers for the harvest listing with their acceptance status and an 'Accept' button for pending offers",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-transport-tracking-section-to-the-buyercommitmentcard-component-that-displays-the-accepted-transport-offer-s-tracking-information-including-current-location-estimated-delivery-time-and-status",
+      "title": "Add a transport tracking section to the BuyerCommitmentCard component that displays the accepted transport offer's tracking information including current location, estimated delivery time, and status",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-transporttrackingmodal-component-that-displays-detailed-tracking-information-and-allows-transporters-to-update-location-estimated-delivery-time-and-status",
+      "title": "Create a TransportTrackingModal component that displays detailed tracking information and allows transporters to update location, estimated delivery time, and status",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-transporterdashboard-to-display-the-transporter-s-accepted-transport-offers-with-current-tracking-status-and-a-button-to-open-the-transporttrackingmodal-for-updates",
+      "title": "Update the TransporterDashboard to display the transporter's accepted transport offers with current tracking status and a button to open the TransportTrackingModal for updates",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-frontend-useaccepttransportoffer-mutation-hook-in-usequeries-ts-to-accept-and-pass-a-commitmentid-parameter-to-the-backend",
+      "title": "Update the frontend useAcceptTransportOffer mutation hook in useQueries.ts to accept and pass a commitmentId parameter to the backend",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-farmerlistingcard-component-to-display-a-dropdown-or-select-input-showing-available-buyer-commitments-for-the-harvest-listing-allowing-the-farmer-to-choose-which-commitment-to-link-when-accepting-a-transport-offer",
+      "title": "Update the FarmerListingCard component to display a dropdown or select input showing available buyer commitments for the harvest listing, allowing the farmer to choose which commitment to link when accepting a transport offer",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-filter-out-commitments-that-have-already-been-linked-to-an-accepted-transport-offer-from-the-commitment-selector-in-farmerlistingcard-so-each-commitment-can-only-be-linked-once",
+      "title": "Filter out commitments that have already been linked to an accepted transport offer from the commitment selector in FarmerListingCard, so each commitment can only be linked once",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-post-demand-button-to-the-buyer-dashboard-that-opens-a-modal-dialog-for-posting-crop-demand-requests",
+      "title": "Add a 'Post Demand' button to the Buyer dashboard that opens a modal dialog for posting crop demand requests",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-postdemandmodal-component-that-collects-crop-type-quantity-price-per-kg-and-destination-supply-location-from-the-buyer",
+      "title": "Create a PostDemandModal component that collects crop type, quantity, price per kg, and destination supply location from the buyer",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-mutation-hook-usecreatebuyerdemand-in-usequeries-ts-that-calls-the-backend-createbuyerdemand-function",
+      "title": "Create a frontend mutation hook useCreateBuyerDemand in useQueries.ts that calls the backend createBuyerDemand function",
+      "reqIds": [
+        "REQ-42"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-query-hook-usegetbuyerdemands-in-usequeries-ts-that-fetches-the-buyer-s-demand-requests",
+      "title": "Create a frontend query hook useGetBuyerDemands in useQueries.ts that fetches the buyer's demand requests",
+      "reqIds": [
+        "REQ-44"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-my-demands-tab-or-section-to-the-buyerdashboard-that-displays-the-buyer-s-posted-demand-requests-in-a-grid-layout",
+      "title": "Add a 'My Demands' tab or section to the BuyerDashboard that displays the buyer's posted demand requests in a grid layout",
+      "reqIds": [
+        "REQ-45"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-query-hook-usegetallbuyerdemands-in-usequeries-ts-that-fetches-all-buyer-demand-requests-from-all-buyers-not-just-the-caller-s-demands",
+      "title": "Create a frontend query hook useGetAllBuyerDemands in useQueries.ts that fetches all buyer demand requests from all buyers (not just the caller's demands)",
+      "reqIds": [
+        "REQ-46"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-buyer-demands-tab-or-section-to-the-farmerdashboard-that-displays-all-posted-buyer-demands-in-a-grid-layout-using-buyerdemandcard-components",
+      "title": "Add a 'Buyer Demands' tab or section to the FarmerDashboard that displays all posted buyer demands in a grid layout using BuyerDemandCard components",
+      "reqIds": [
+        "REQ-48"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-mutation-hook-useacceptbuyerdemand-in-usequeries-ts-that-allows-farmers-to-accept-a-buyer-demand-by-providing-their-harvest-listing-id",
+      "title": "Create a frontend mutation hook useAcceptBuyerDemand in useQueries.ts that allows farmers to accept a buyer demand by providing their harvest listing ID",
+      "reqIds": [
+        "REQ-49"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-accept-demand-button-to-the-buyerdemandcard-component-that-opens-a-modal-or-dialog-allowing-the-farmer-to-select-which-of-their-harvest-listings-to-link-with-the-buyer-demand",
+      "title": "Add an 'Accept Demand' button to the BuyerDemandCard component that opens a modal or dialog allowing the farmer to select which of their harvest listings to link with the buyer demand",
+      "reqIds": [
+        "REQ-51"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-createharvestlistingmodal-component-in-frontend-src-components-createharvestlistingmodal-tsx-to-collect-two-additional-fields-from-farmers-days-since-planting-number-input-and-total-growth-cycle-days-number-input-and-pass-these-values-to-the-usecreateharvestlisting-mutation",
+      "title": "Update the CreateHarvestListingModal component in frontend/src/components/CreateHarvestListingModal.tsx to collect two additional fields from farmers: 'Days Since Planting' (number input) and 'Total Growth Cycle (days)' (number input), and pass these values to the useCreateHarvestListing mutation",
+      "reqIds": [
+        "REQ-54"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-usecreateharvestlisting-mutation-hook-in-frontend-src-hooks-usequeries-ts-to-accept-and-pass-dayspassed-and-totalgrowthcycle-parameters-to-the-backend-createharvestlisting-function",
+      "title": "Update the useCreateHarvestListing mutation hook in frontend/src/hooks/useQueries.ts to accept and pass daysPassed and totalGrowthCycle parameters to the backend createHarvestListing function",
+      "reqIds": [
+        "REQ-55"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-rename-the-existing-readinessscore-slider-field-in-createharvestlistingmodal-to-farmer-assessment-score-to-clarify-that-it-represents-the-farmer-s-subjective-input-the-30-component-and-update-any-related-labels-or-help-text-to-explain-this-represents-the-farmer-s-quality-assessment",
+      "title": "Rename the existing readinessScore slider field in CreateHarvestListingModal to 'Farmer Assessment Score' to clarify that it represents the farmer's subjective input (the 30% component), and update any related labels or help text to explain this represents the farmer's quality assessment",
+      "reqIds": [
+        "REQ-56"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-createharvestlistingmodal-component-to-make-the-farmer-assessment-score-slider-days-since-planting-input-and-total-growth-cycle-days-input-mandatory-fields-that-farmers-must-provide-when-creating-a-harvest-listing",
+      "title": "Update the CreateHarvestListingModal component to make the 'Farmer Assessment Score' slider, 'Days Since Planting' input, and 'Total Growth Cycle (days)' input mandatory fields that farmers must provide when creating a harvest listing",
+      "reqIds": [
+        "REQ-57"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-the-calculated-readiness-score-prominently-on-the-farmerlistingcard-component-so-farmers-can-see-the-readiness-score-for-each-of-their-harvest-listings",
+      "title": "Display the calculated readiness score prominently on the FarmerListingCard component so farmers can see the readiness score for each of their harvest listings",
+      "reqIds": [
+        "REQ-58"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-calculated-readiness-score-is-visible-on-the-buyerlistingcard-component-so-buyers-can-see-the-readiness-score-when-browsing-harvest-listings-in-the-marketplace",
+      "title": "Ensure the calculated readiness score is visible on the BuyerListingCard component so buyers can see the readiness score when browsing harvest listings in the marketplace",
+      "reqIds": [
+        "REQ-59"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-visual-indicator-on-both-farmerlistingcard-and-buyerlistingcard-components-that-shows-the-ml-prediction-component-of-the-readiness-score-with-a-label-like-ml-confidence-or-ai-prediction-alongside-the-overall-readiness-score",
+      "title": "Add a visual indicator on both FarmerListingCard and BuyerListingCard components that shows the ML prediction component of the readiness score with a label like 'ML Confidence' or 'AI Prediction' alongside the overall readiness score",
+      "reqIds": [
+        "REQ-63"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-predictive-analytics-section-to-the-farmer-dashboard-that-displays-ai-forecasted-yield-volume-and-market-price-predictions-2-weeks-in-advance-for-each-harvest-listing-showing-predicted-quantity-in-kg-and-estimated-price-per-kg-with-confidence-indicators",
+      "title": "Add a 'Predictive Analytics' section to the Farmer Dashboard that displays AI-forecasted yield volume and market price predictions 2 weeks in advance for each harvest listing, showing predicted quantity in kg and estimated price per kg with confidence indicators",
+      "reqIds": [
+        "REQ-64"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-price-forecast-column-or-section-to-the-buyer-dashboard-marketplace-that-displays-ai-predicted-market-prices-2-weeks-ahead-for-each-harvest-listing-helping-buyers-make-informed-commitment-decisions",
+      "title": "Add a 'Price Forecast' column or section to the Buyer Dashboard marketplace that displays AI-predicted market prices 2 weeks ahead for each harvest listing, helping buyers make informed commitment decisions",
+      "reqIds": [
+        "REQ-65"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-mutation-hook-usepredictyieldandprice-in-usequeries-ts-that-calls-the-backend-predictyieldandprice-function-and-returns-the-forecasted-yield-volume-and-market-price-predictions",
+      "title": "Create a frontend mutation hook usePredictYieldAndPrice in useQueries.ts that calls the backend predictYieldAndPrice function and returns the forecasted yield volume and market price predictions",
+      "reqIds": [
+        "REQ-67"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-crop-photo-analysis-button-to-the-createharvestlistingmodal-that-opens-an-image-upload-interface-allowing-farmers-to-upload-a-crop-photo-for-ai-maturity-detection",
+      "title": "Add a 'Crop Photo Analysis' button to the CreateHarvestListingModal that opens an image upload interface allowing farmers to upload a crop photo for AI maturity detection",
+      "reqIds": [
+        "REQ-68"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-cropphotoanalysismodal-component-that-allows-farmers-to-upload-crop-images-and-displays-an-ai-generated-readiness-score-based-on-computer-vision-analysis-of-color-texture-and-size-with-the-option-to-use-this-score-to-auto-fill-the-farmer-assessment-score-field",
+      "title": "Create a CropPhotoAnalysisModal component that allows farmers to upload crop images and displays an AI-generated readiness score based on computer vision analysis of color, texture, and size, with the option to use this score to auto-fill the Farmer Assessment Score field",
+      "reqIds": [
+        "REQ-69"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-mutation-hook-useanalyzecropmaturity-in-usequeries-ts-that-uploads-a-crop-image-to-the-backend-analyzecropmaturity-function-and-returns-the-computer-vision-readiness-score-with-analysis-details",
+      "title": "Create a frontend mutation hook useAnalyzeCropMaturity in useQueries.ts that uploads a crop image to the backend analyzeCropMaturity function and returns the computer vision readiness score with analysis details",
+      "reqIds": [
+        "REQ-71"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-route-optimizer-button-or-section-to-the-transporter-dashboard-that-opens-a-logistics-matching-interface-showing-optimized-multi-farm-pickup-routes-paired-with-high-volume-buyers-to-maximize-truck-capacity-utilization",
+      "title": "Add a 'Route Optimizer' button or section to the Transporter Dashboard that opens a logistics matching interface showing optimized multi-farm pickup routes paired with high-volume buyers to maximize truck capacity utilization",
+      "reqIds": [
+        "REQ-72"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-routeoptimizermodal-component-that-displays-ai-optimized-logistics-routes-pairing-multiple-nearby-farmers-with-a-single-transporter-and-buyer-showing-pickup-sequence-estimated-distances-total-load-and-projected-cost-savings-of-20-30",
+      "title": "Create a RouteOptimizerModal component that displays AI-optimized logistics routes pairing multiple nearby farmers with a single transporter and buyer, showing pickup sequence, estimated distances, total load, and projected cost savings of 20-30%",
+      "reqIds": [
+        "REQ-73"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-query-hook-useoptimizelogisticsroutes-in-usequeries-ts-that-fetches-ai-optimized-logistics-routes-from-the-backend-based-on-transporter-vehicle-capacity-and-location",
+      "title": "Create a frontend query hook useOptimizeLogisticsRoutes in useQueries.ts that fetches AI-optimized logistics routes from the backend based on transporter vehicle capacity and location",
+      "reqIds": [
+        "REQ-75"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-quick-entry-or-voice-input-button-to-the-createharvestlistingmodal-that-opens-a-voice-text-input-interface-allowing-farmers-to-enter-harvest-details-via-natural-language-text-or-voice-notes",
+      "title": "Add a 'Quick Entry' or 'Voice Input' button to the CreateHarvestListingModal that opens a voice/text input interface allowing farmers to enter harvest details via natural language text or voice notes",
+      "reqIds": [
+        "REQ-76"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-voiceinputmodal-component-that-allows-farmers-to-record-voice-notes-or-enter-free-form-text-about-their-harvest-then-displays-the-ai-parsed-structured-data-crop-type-quantity-ready-date-location-with-the-option-to-auto-fill-the-createharvestlistingmodal-form-fields",
+      "title": "Create a VoiceInputModal component that allows farmers to record voice notes or enter free-form text about their harvest, then displays the AI-parsed structured data (crop type, quantity, ready date, location) with the option to auto-fill the CreateHarvestListingModal form fields",
+      "reqIds": [
+        "REQ-77"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-mutation-hook-useparseharvestinput-in-usequeries-ts-that-sends-raw-text-or-voice-transcription-to-the-backend-parseharvestinput-function-and-returns-the-nlp-extracted-structured-harvest-data",
+      "title": "Create a frontend mutation hook useParseHarvestInput in useQueries.ts that sends raw text or voice transcription to the backend parseHarvestInput function and returns the NLP-extracted structured harvest data",
+      "reqIds": [
+        "REQ-79"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-upload-or-capture-button-to-the-farmer-dashboard-that-opens-a-modal-for-farmers-to-submit-high-resolution-crop-photos-from-the-field",
+      "title": "Add an 'Upload or Capture' button to the Farmer Dashboard that opens a modal for farmers to submit high-resolution crop photos from the field",
+      "reqIds": [
+        "REQ-80"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-a-scanning-animation-in-the-crop-diagnosis-modal-while-the-ai-image-analysis-is-processing",
+      "title": "Display a 'Scanning...' animation in the crop diagnosis modal while the AI image analysis is processing",
+      "reqIds": [
+        "REQ-81"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-mutation-hook-usediagnosecrop-in-usequeries-ts-that-uploads-a-crop-image-to-the-backend-diagnosecrop-function-and-returns-the-comprehensive-analysis-results",
+      "title": "Create a frontend mutation hook useDiagnoseCrop in useQueries.ts that uploads a crop image to the backend diagnoseCrop function and returns the comprehensive analysis results",
+      "reqIds": [
+        "REQ-83"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-ai-crop-diagnosis-results-in-a-clean-visual-card-showing-harvest-readiness-score-0-100-crop-quality-grade-premium-standard-reject-identified-health-issues-pests-diseases-nutrient-deficiencies-predicted-harvest-date-and-best-market-price-prediction",
+      "title": "Display AI crop diagnosis results in a clean, visual card showing harvest readiness score (0-100%), crop quality grade (Premium/Standard/Reject), identified health issues (pests, diseases, nutrient deficiencies), predicted harvest date, and best market price prediction",
+      "reqIds": [
+        "REQ-84"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-extend-the-buyerlistingcard-component-to-display-crop-diagnosis-data-quality-grade-and-health-status-when-available-allowing-buyers-to-see-the-quality-of-upcoming-harvests-in-real-time",
+      "title": "Extend the BuyerListingCard component to display crop diagnosis data (quality grade and health status) when available, allowing buyers to see the quality of upcoming harvests in real-time",
+      "reqIds": [
+        "REQ-86"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-entire-ai-crop-diagnosis-feature-interface-upload-button-modal-results-card-is-fully-mobile-responsive-and-optimized-for-farmers-using-the-feature-in-the-field-on-mobile-devices",
+      "title": "Ensure the entire AI Crop Diagnosis feature interface (upload button, modal, results card) is fully mobile-responsive and optimized for farmers using the feature in the field on mobile devices",
+      "reqIds": [
+        "REQ-87"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-routeoptimizermodal-component-to-display-optimized-multi-farm-pickup-routes-fetched-from-useoptimizelogisticsroutes-hook-showing-pickup-sequence-farm-locations-estimated-distances-between-stops-total-load-capacity-utilization-and-projected-cost-savings-percentage-20-30",
+      "title": "Update the RouteOptimizerModal component to display optimized multi-farm pickup routes fetched from useOptimizeLogisticsRoutes hook, showing pickup sequence, farm locations, estimated distances between stops, total load capacity utilization, and projected cost savings percentage (20-30%)",
+      "reqIds": [
+        "REQ-89"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-routeoptimizermodal-groups-multiple-harvest-listings-from-nearby-farmers-based-on-proximity-and-pairs-them-with-high-volume-buyer-commitments-to-maximize-truck-capacity-utilization",
+      "title": "Ensure the RouteOptimizerModal groups multiple harvest listings from nearby farmers based on proximity and pairs them with high-volume buyer commitments to maximize truck capacity utilization",
+      "reqIds": [
+        "REQ-90"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-visual-indicators-in-the-routeoptimizermodal-that-show-truck-capacity-utilization-metrics-including-current-load-percentage-and-remaining-capacity-after-each-pickup-stop",
+      "title": "Add visual indicators in the RouteOptimizerModal that show truck capacity utilization metrics, including current load percentage and remaining capacity after each pickup stop",
+      "reqIds": [
+        "REQ-91"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-that-the-canister-can-be-successfully-deployed-and-that-all-existing-functionality-continues-to-work-correctly-after-the-fix-is-applied",
+      "title": "Verify that the canister can be successfully deployed and that all existing functionality continues to work correctly after the fix is applied",
+      "reqIds": [
+        "REQ-94"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Landing page with Agri-tech aesthetic (green-and-white, Tailwind CSS)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Farmer user role implementation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Buyer user role implementation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Transporter user role implementation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Pre-Harvest Commitments feature to reduce spoilage",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Marketplace page for Buyers showing Upcoming Harvests with Readiness Scores",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Pre-Harvest Commitment button triggering Smart Escrow Payment UI",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Filter harvests by Village-wise variation and Crop Quality Certificate status",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Update the backend TransportOffer type in main.mo to store vehicleType, loadCapacity, routeStart, and routeEnd fields instead of distance and cost",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Fix buyer commitments not displaying after commitment is made",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Verify that when a buyer makes a Pre-Harvest Commitment using the SmartEscrowPaymentModal, the commitment is successfully stored in the backend with the correct buyerId and listingId association",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Verify that the backend getCommitmentsByBuyer query correctly filters and returns all commitments where the buyerId matches the caller's principal",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Add transport offer acceptance status visibility for Buyers and Farmers",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Implement tracking functionality for transport progress (location, estimated delivery, status updates)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Add an 'accepted' boolean field to the TransportOffer type in the backend to track whether a transport offer has been accepted by the farmer",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Create a backend function that allows farmers to accept a transport offer for their harvest listing",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Add tracking fields to the TransportOffer type in the backend including currentLocation (Text), estimatedDeliveryTime (Text), and trackingStatus (Text with values like 'Pending', 'In Transit', 'Delivered')",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Create a backend function that allows transporters to update tracking information (current location, estimated delivery time, and status) for their accepted transport offers",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Allow farmer to choose specific commitment to link with a transport offer, and hide that commitment from selection once chosen",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Add a commitmentId field to the TransportOffer type in the backend to associate a transport offer with a specific buyer commitment",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Update the backend acceptTransportOffer function to accept a commitmentId parameter and store it in the TransportOffer record when a farmer accepts an offer",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Add 'Post Demand' button for Buyers to specify crop demand (crop type, quantity, price per kg, destination supply)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Create a BuyerDemand type in the backend main.mo actor to store buyer demand requests with fields for id, buyerId, cropType, quantity, pricePerKg, destinationSupply, createdAt, and status",
+      "reqIds": [
+        "REQ-40"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "Implement a createBuyerDemand function in the backend that allows authenticated buyers to create new demand requests",
+      "reqIds": [
+        "REQ-41"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-30",
+      "summary": "Implement a getBuyerDemands function in the backend that returns all buyer demand requests for the authenticated caller",
+      "reqIds": [
+        "REQ-43"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-31",
+      "summary": "Display buyer demand requests to farmers so they can view and accept specific commitments",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-33",
+      "summary": "Create a backend function getAllBuyerDemands that returns all buyer demand requests from all buyers with open status",
+      "reqIds": [
+        "REQ-47"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-36",
+      "summary": "Create a backend function acceptBuyerDemand that allows farmers to accept a buyer demand by linking it to one of their harvest listings",
+      "reqIds": [
+        "REQ-50"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-37",
+      "summary": "Implement readiness score calculation using formula: (Days Passed / Total Growth Cycle × 70) + (Farmer Input × 30)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-38",
+      "summary": "Add two new fields to the HarvestListing type in backend/main.mo: daysPassed (Nat) representing the number of days elapsed since planting, and totalGrowthCycle (Nat) representing the total growth cycle duration in days for the crop",
+      "reqIds": [
+        "REQ-52"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-39",
+      "summary": "Update the createHarvestListing function in backend/main.mo to accept daysPassed and totalGrowthCycle parameters, and calculate the readiness score using the formula: readinessScore = (daysPassed / totalGrowthCycle × 70) + (farmerInput × 30), where farmerInput is the existing readinessScore parameter provided by the farmer (scaled to 30% weight)",
+      "reqIds": [
+        "REQ-53"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-40",
+      "summary": "Integrate machine learning prediction for crop readiness to supplement the readiness score calculation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-44",
+      "summary": "Create a backend function predictCropReadiness that uses machine learning techniques to predict crop readiness based on historical harvest data including daysPassed, totalGrowthCycle, cropType, location, and farmerAssessmentScore",
+      "reqIds": [
+        "REQ-60"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-45",
+      "summary": "Integrate the ML prediction result into the readiness score calculation by adding a machine learning component to the formula, adjusting the weights to: (Days Passed / Total Growth Cycle × 50) + (Farmer Input × 30) + (ML Prediction × 20)",
+      "reqIds": [
+        "REQ-61"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-46",
+      "summary": "Create a frontend query hook useGetReadinessScorePrediction in useQueries.ts that fetches the ML-predicted readiness score for a specific harvest listing",
+      "reqIds": [
+        "REQ-62"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-47",
+      "summary": "Implement predictive analytics in Farmer and Buyer Dashboards using regression models to forecast yield volume and market price 2 weeks in advance",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-48",
+      "summary": "Add computer vision capability for crop maturity detection - farmers can upload crop photos to get AI-analyzed readiness scores based on color, texture, and size",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-49",
+      "summary": "Create logistics optimization matcher using constraint satisfaction or genetic algorithms to pair multiple farmers with single trucks and buyers for efficient routing",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-50",
+      "summary": "Implement NLP/GenAI voice and text parsing using LLM (GPT-4o-mini or similar) to convert farmer voice notes or SMS into structured harvest data",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-53",
+      "summary": "Create a backend function predictYieldAndPrice that accepts cropType, location, daysPassed, totalGrowthCycle, and quantity parameters, and returns predicted yield volume and market price using regression analysis on historical harvest data stored in the backend",
+      "reqIds": [
+        "REQ-66"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-57",
+      "summary": "Create a backend function analyzeCropMaturity that accepts an image file (as base64 or Blob reference) and returns a computer vision-based readiness score from 0-100 by analyzing crop color, texture, and size characteristics",
+      "reqIds": [
+        "REQ-70"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-61",
+      "summary": "Create a backend function optimizeLogisticsRoutes that accepts transporter vehicle capacity and location, then uses constraint satisfaction or optimization algorithms to match multiple nearby harvest listings with high-volume buyer commitments, returning optimized pickup routes with sequence, distances, and cost savings estimates",
+      "reqIds": [
+        "REQ-74"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-65",
+      "summary": "Create a backend function parseHarvestInput that accepts raw text or transcribed voice input and uses NLP techniques to extract structured harvest data including crop type, quantity, harvest date, and location, returning the parsed fields in a structured format",
+      "reqIds": [
+        "REQ-78"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-66",
+      "summary": "Add 'AI Crop Diagnosis' feature to Farmer Dashboard with upload/capture button, scanning animation, and ML image analysis for harvest readiness, crop quality grading, and health monitoring",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-67",
+      "summary": "Create backend image analysis workflow that inspects crop photos for harvest readiness (0-100% score), crop quality grade (Premium/Standard/Reject), and health monitoring (pests, diseases, nutrient deficiencies)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-68",
+      "summary": "Display AI crop diagnosis results in a visual card showing harvest readiness score, quality grade, health issues, predicted harvest date, and best market price prediction",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-69",
+      "summary": "Save crop diagnosis analysis to yields database and update global supply map so buyers can see quality of upcoming harvests in real-time",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-70",
+      "summary": "Ensure AI Crop Diagnosis feature is mobile-responsive for farmers in the field",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-73",
+      "summary": "Create a backend function diagnoseCrop that accepts a crop image and returns a comprehensive analysis including harvest readiness score (0-100%), crop quality grade (Premium, Standard, or Reject), and health monitoring results (pests, diseases like leaf rust, nutrient deficiencies)",
+      "reqIds": [
+        "REQ-82"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-76",
+      "summary": "Update the backend diagnoseCrop function to automatically save the crop diagnosis analysis to the HarvestListing record in the yields database, associating it with the corresponding harvest listing",
+      "reqIds": [
+        "REQ-85"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-77",
+      "summary": "Update the TransporterDashboard component to prominently display a 'Route Optimizer' button or section that opens the RouteOptimizerModal when clicked",
+      "reqIds": [
+        "REQ-88"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-78",
+      "summary": "Investigate the deployment error that occurred during the most recent deployment attempt and identify the root cause by examining deployment logs, build output, and canister configuration",
+      "reqIds": [
+        "REQ-92"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-79",
+      "summary": "Fix the identified deployment error by applying the appropriate solution based on the root cause (e.g., correcting syntax errors, fixing type mismatches, adjusting canister settings, resolving dependency issues)",
+      "reqIds": [
+        "REQ-93"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "HarvestSync",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

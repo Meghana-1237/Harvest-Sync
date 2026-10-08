@@ -1,0 +1,28 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-verify-that-the-canister-can-be-successfully-deployed-and-that-all-existing-functionality-continues-to-work-correctly-after-the-fix-is-applied",
+      "featureTitle": "Verify that the canister can be successfully deployed and that all existing functionality continues to work correctly after the fix is applied",
+      "files": [
+        "frontend/src/pages/BuyerDashboard.tsx",
+        "frontend/src/pages/FarmerDashboard.tsx",
+        "frontend/src/pages/TransporterDashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0",
+        "camera@1.0.0"
+      ],
+      "testIds": [
+        "REQ-94"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
